@@ -6,6 +6,8 @@ import router from "./src/routes/app.route.js";
 
 const app = express();
 
+const port = PORT || 5000;
+
 //configurando cors
 app.use(cors({ origin: "*" }));
 
@@ -19,6 +21,6 @@ await connectionDb();
 //configurando rutas
 app.use("/api/v1", router);
 
-app.listen(PORT, () => {
+app.listen(port, () => {
   console.log(`Servidor inicializado en el puerto ${PORT}`);
 });
