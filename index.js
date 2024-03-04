@@ -9,7 +9,7 @@ const app = express();
 const port = PORT || 5000;
 
 //configurando cors
-app.use(cors({ origin: "*" }));
+app.use(cors({ credentials: true, origin: "*" }));
 
 //configurando servidor
 app.use(urlencoded({ extended: true }));
