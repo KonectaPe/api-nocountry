@@ -23,6 +23,6 @@ router.post("/register", userRegister);
 router.get("/posts", auth, getPosts);
 router.post("/posts", auth, createPost);
 router.delete("/posts/:id", auth, deletePost);
-router.put("/post/:id", auth, updatePost)
+router.put("/posts/:id", auth, updatePost)
 
 export default router;
