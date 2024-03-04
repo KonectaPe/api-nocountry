@@ -7,20 +7,20 @@ export const getPosts = async (req, res) => {
       user: req.user.id,
     }).populate("user");
 
-    const informationPost = posts.map((el) => {
-      return {
-        title: el.title,
-        description: el.description,
-        url: el.url,
-        user: {
-          fullName: el.user.fullName,
-          username: el.user.username,
-          email: el.user.email,
-        },
-      };
-    });
-
-    res.json(informationPost);
+    // const informationPost = posts.map((el) => {
+    //   return {
+    //     id: el._id,
+    //     title: el.title,
+    //     description: el.description,
+    //     url: el.link,
+    //     user: {
+    //       fullName: el.user.fullName,
+    //       username: el.user.username,
+    //       email: el.user.email,
+    //     },
+    //   };
+    // });
+    res.json(posts);
   } catch (error) {
     return res.json({ error: error.message });
   }
@@ -53,6 +53,30 @@ export const createPost = async (req, res) => {
 
     await newPost.save();
     res.json(newPost);
+  } catch (error) {
+    return res.json({ error: error.message });
+  }
+};
+
+export const deletePost = async (req, res) => {
+  try {
+    const deletedPost = await Post.findByIdAndDelete(req.params.id);
+    if (!deletedPost) return res.json({ message: "Post no encontrado" });
+    return res.json({ message: "Post eliminado" });
+  } catch (error) {
+    return res.json({ error: error.message });
+  }
+};
+
+export const updatePost = async (req, res) => {
+  try {
+    const { title, description, link } = req.body;
+    const postUpdate = await Post.findOneAndUpdate(
+      { _id: req.params.id },
+      { title, description, link },
+      { new: true }
+    );
+    return res.json(postUpdate);
   } catch (error) {
     return res.json({ error: error.message });
   }
