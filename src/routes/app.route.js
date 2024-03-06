@@ -14,6 +14,8 @@ import { verifyToken } from "../controllers/verifyToken.controller.js";
 
 const router = Router();
 
+
+
 // Verificar si el servidor está activo
 router.get("/", responseServer);
 

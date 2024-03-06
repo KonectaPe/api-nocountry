@@ -11,6 +11,15 @@ const port = PORT || 5000;
 //configurando cors
 app.use(cors({ credentials: true, origin: FRONTEND_URL }));
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", FRONTEND_URL);
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 //configurando servidor
 app.use(urlencoded({ extended: true }));
 app.use(json());
