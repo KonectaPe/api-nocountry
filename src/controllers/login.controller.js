@@ -21,11 +21,12 @@ export const userLogin = async (req, res) => {
       email,
     });
 
-    if (!user) return res.json({ error: "Usuario no encontrado" });
+    if (!user) return res.status(401).json({ error: "Usuario no encontrado" });
 
     const validPassword = await bcrypt.compare(password, user.password);
 
-    if (!validPassword) return res.json({ error: "Usuario no encontrado" });
+    if (!validPassword)
+      return res.status(401).json({ error: "Usuario no encontrado" });
 
     const token = jwt.sign(
       {
@@ -35,8 +36,13 @@ export const userLogin = async (req, res) => {
       },
       AUTH_TOKEN
     );
-    return res.json({ token });
+    return res.status(200).json({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      token: token,
+    });
   } catch (error) {
-    return res.json({ error: error.message });
+    return res.status(501).json({ error: error.message });
   }
 };

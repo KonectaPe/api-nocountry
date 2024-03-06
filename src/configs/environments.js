@@ -3,4 +3,5 @@ dotenv.config();
 
 export const MONGO_URI = process.env.MONGO_URI;
 export const PORT = process.env.PORT;
-export const AUTH_TOKEN = process.env.AUTH_TOKEN
+export const AUTH_TOKEN = process.env.AUTH_TOKEN;
+export const FRONTEND_URL = process.env.FRONTEND_URL;

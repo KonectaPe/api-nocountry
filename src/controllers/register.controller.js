@@ -51,8 +51,13 @@ export const userRegister = async (req, res) => {
       },
       AUTH_TOKEN
     );
-    return res.json({ token: token });
+    return res.status(200).json({
+      id: userSaved._id,
+      fullName: userSaved.fullName,
+      username: userSaved.username,
+      token: token,
+    });
   } catch (error) {
-    return res.json({ error: error.message });
+    return res.status(501).json({ error: error.message });
   }
 };
